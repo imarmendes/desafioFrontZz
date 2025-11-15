@@ -1,12 +1,14 @@
+// core/viewmodels/RegisterViewModel.ts
 import { useState } from "react";
 import { validators } from "../utils/validators";
-// import { authApi } from "../../api/authApi";
+import { storage } from "../utils/storage";
+// import { authApi } from "../../api/authApi"; // habilitar depois
 
 export function useRegisterViewModel() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -14,38 +16,58 @@ export function useRegisterViewModel() {
   async function register() {
     setError(null);
 
-    if (!validators.required(name)) return setError("Nome obrigatório");
-    if (!validators.isEmail(email)) return setError("E-mail inválido");
-    if (!validators.required(password)) return setError("Senha obrigatória");
-    if (password !== confirm) return setError("As senhas não coincidem");
+    // validações
+    if (!validators.required(name)) {
+      setError("Nome é obrigatório");
+      return;
+    }
+
+    if (!validators.isEmail(email)) {
+      setError("E-mail inválido");
+      return;
+    }
+
+    if (!validators.required(password)) {
+      setError("A senha é obrigatória");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem");
+      return;
+    }
 
     setLoading(true);
 
     try {
-      // chamada futura:
-      // await authApi.register({ name, email, password });
+      // Chamada real futuramente:
+      // const user = await authApi.register({ name, email, password });
 
-      await new Promise((r) => setTimeout(r, 600));
+      // Simulação por enquanto:
+      const user = {
+        id: "fake-id-1",
+        name,
+        email,
+        token: "fake-token-999",
+      };
 
-      return true;
+      storage.saveUser(user);
+
+      return user;
     } catch (err: any) {
-      setError(err.message ?? "Erro ao cadastrar");
+      setError(err.message ?? "Erro ao criar conta");
     } finally {
       setLoading(false);
     }
   }
 
   return {
-    name,
-    email,
-    password,
-    confirm,
+    name, setName,
+    email, setEmail,
+    password, setPassword,
+    confirmPassword, setConfirmPassword,
     error,
     loading,
-    setName,
-    setEmail,
-    setPassword,
-    setConfirm,
     register
   };
 }

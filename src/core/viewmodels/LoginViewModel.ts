@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validators } from "../utils/validators";
 import { storage } from "../utils/storage";
-// import { authApi } from "../../api/authApi"; // habilitar depois
+// import { authApi } from "../../api/authApi";
 
 export function useLoginViewModel() {
   const [email, setEmail] = useState("");
@@ -9,26 +9,35 @@ export function useLoginViewModel() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  function updateEmail(v: string) {
+    setEmail(v)
+    setError(null)
+  }
+
+  function updatePassword(v: string) {
+    setPassword(v)
+    setError(null)
+  }
+
   async function login() {
     setError(null);
 
     if (!validators.isEmail(email)) {
       setError("E-mail inválido");
-      return;
+      return null;
     }
 
     if (!validators.required(password)) {
       setError("Senha é obrigatória");
-      return;
+      return null;
     }
 
     setLoading(true);
 
     try {
-      // Chamada real posteriormente:
+      // Futuro:
       // const result = await authApi.login({ email, password });
 
-      // simulação por enquanto
       const result = {
         id: "1",
         name: "Usuário Teste",
@@ -38,9 +47,11 @@ export function useLoginViewModel() {
 
       storage.saveUser(result);
 
-      return result; // usado pela View para navegar
+      return result;
+
     } catch (err: any) {
       setError(err.message ?? "Erro ao fazer login");
+      return null
     } finally {
       setLoading(false);
     }
@@ -51,8 +62,8 @@ export function useLoginViewModel() {
     password,
     error,
     loading,
-    setEmail,
-    setPassword,
+    setEmail: updateEmail,
+    setPassword: updatePassword,
     login
   };
 }

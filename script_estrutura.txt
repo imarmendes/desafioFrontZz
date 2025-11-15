@@ -1,18 +1,20 @@
-# Criar pastas principais
-    mkdir api
-    mkdir core
-    mkdir core\models
-    mkdir core\viewmodels
-    mkdir core\utils
-    mkdir ui
-    mkdir ui\components
-    mkdir ui\pages
-    mkdir ui\pages\Login
-    mkdir ui\pages\Register
-    mkdir ui\pages\Products
-    mkdir ui\routes
-    mkdir ui\styles
-    mkdir lib
+# Criar pastas principais (estrutura atual do projeto)
+mkdir api
+mkdir core
+mkdir core\models
+mkdir core\viewmodels
+mkdir core\utils
+mkdir ui
+mkdir ui\components
+mkdir ui\components\mui
+mkdir ui\pages
+mkdir ui\pages\Login
+mkdir ui\pages\Register
+mkdir ui\pages\Products
+mkdir ui\routes
+mkdir ui\styles
+mkdir ui\theme
+mkdir lib
 
 # Criar arquivos base na pasta api
 new-item api\apiClient.ts -ItemType File
@@ -38,9 +40,12 @@ new-item ui\components\Input.tsx -ItemType File
 new-item ui\components\Button.tsx -ItemType File
 new-item ui\components\Navbar.tsx -ItemType File
 new-item ui\components\ProtectedRoute.tsx -ItemType File
+new-item ui\components\mui\MUITextField.tsx -ItemType File
+new-item ui\components\mui\MUIButton.tsx -ItemType File
 
 # Criar arquivos UI/pages/Login
 new-item ui\pages\Login\LoginPage.tsx -ItemType File
+new-item ui\pages\Login\LoginForm.tsx -ItemType File
 
 # Criar arquivos UI/pages/Register
 new-item ui\pages\Register\RegisterPage.tsx -ItemType File
@@ -55,5 +60,14 @@ new-item ui\routes\AppRoutes.tsx -ItemType File
 # Criar arquivos ui/styles
 new-item ui\styles\global.css -ItemType File
 
+# Criar arquivos ui/theme
+new-item ui\theme\muiTheme.ts -ItemType File
+new-item ui\theme\ThemeContext.tsx -ItemType File
+
 # Criar arquivos lib
 new-item lib\http.ts -ItemType File
+
+# Arquivos adicionais presentes no projeto (já gerados pelo Vite/usuário)
+new-item src\App.tsx -ItemType File
+new-item src\main.tsx -ItemType File
+new-item public\vite.svg -ItemType File

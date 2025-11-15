@@ -1,28 +1,37 @@
+// ui/pages/Register/RegisterForm.tsx
 import React from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { MUITextField } from '../../components/mui/MUITextField'
 import { MUIButton } from '../../components/mui/MUIButton'
-import { useLoginViewModel } from '../../../core/viewmodels/LoginViewModel'
-import { useNavigate } from 'react-router-dom'
+import { useRegisterViewModel } from '../../../core/viewmodels/RegisterViewModel'
 
-export const LoginForm: React.FC = () => {
-  const vm = useLoginViewModel()
-  const navigate = useNavigate()
+export const RegisterForm: React.FC = () => {
+  const vm = useRegisterViewModel()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const result = await vm.login()
 
-    if (result) {
-      navigate('/products') // rota após login
+    const user = await vm.register()
+
+    if (user) {
+      console.log("Registered:", user)
+      // TODO → navegar para /products ou /login
     }
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <Box component="form" noValidate onSubmit={handleSubmit}>
       <Stack spacing={2} sx={{ mt: 2 }}>
+
+        <MUITextField
+          label="Nome"
+          value={vm.name}
+          onChange={(e) => vm.setName(e.target.value)}
+          required
+        />
+
         <MUITextField
           label="E-mail"
           type="email"
@@ -38,11 +47,18 @@ export const LoginForm: React.FC = () => {
           value={vm.password}
           onChange={(e) => vm.setPassword(e.target.value)}
           required
-          autoComplete="current-password"
+        />
+
+        <MUITextField
+          label="Confirmar senha"
+          type="password"
+          value={vm.confirmPassword}
+          onChange={(e) => vm.setConfirmPassword(e.target.value)}
+          required
         />
 
         {vm.error && (
-          <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+          <Typography color="error" variant="body2">
             {vm.error}
           </Typography>
         )}
@@ -50,7 +66,7 @@ export const LoginForm: React.FC = () => {
         <MUIButton
           type="submit"
           disabled={vm.loading}
-          label={vm.loading ? 'Entrando...' : 'Entrar'}
+          label={vm.loading ? "Criando conta..." : "Cadastrar"}
         />
       </Stack>
     </Box>

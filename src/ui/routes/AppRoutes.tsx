@@ -1,28 +1,30 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { LoginPage } from '../pages/Login/LoginPage'
-import { Navbar } from "../components/Navbar";
-import { RegisterPage } from '../pages/Register/RegisterPage'
-// import { ProductsPage } from '../pages/Products/ProductsPage'
-// import { ProtectedRoute } from './ProtectedRoute'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LoginPage } from "../pages/Login/LoginPage";
+import { RegisterPage } from "../pages/Register/RegisterPage";
+import { ProductsPage } from "../pages/Products/ProductsPage";
+import { ProtectedRoute } from "../components/ProtectedRoute";
+import { AuthProvider } from "../../core/auth/AuthContext";
 
-export const AppRoutes: React.FC = () => {
+export const AppRoutes = () => {
   return (
     <BrowserRouter>
-        <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        {/* Rota protegida futura
-        <Route path="/products" element={
-          <ProtectedRoute>
-            <ProductsPage />
-          </ProtectedRoute>
-        } />
-        */}
-      </Routes>
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <ProductsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<LoginPage />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
-  )
-}
+  );
+};

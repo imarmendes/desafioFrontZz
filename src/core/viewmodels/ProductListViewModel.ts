@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../models/Product";
-// import { productApi } from "../../api/productApi";
+import { productApi } from "../../api/productApi";
 
 export function useProductListViewModel() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -9,12 +9,11 @@ export function useProductListViewModel() {
   async function loadProducts() {
     setLoading(true);
     try {
-      // futuro:
-      // const list = await productApi.getAll();
-      const list: Product[] = [
-        { id: "1", name: "Produto 1", price: 10 },
-        { id: "2", name: "Produto 2", price: 20 }
-      ];
+      const list = await productApi.list();
+    //   const list: Product[] = [
+    //     { id: "1", name: "Produto 1", price: 10 },
+    //     { id: "2", name: "Produto 2", price: 20 }
+    //   ];
 
       setProducts(list);
     } finally {
@@ -23,8 +22,7 @@ export function useProductListViewModel() {
   }
 
   async function removeProduct(id: string) {
-    // futuramente:
-    // await productApi.delete(id);
+    await productApi.remove(id);
 
     setProducts((prev) => prev.filter((p) => p.id !== id));
   }
