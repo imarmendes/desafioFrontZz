@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LoginPage } from '../pages/Login/LoginPage'
+import { Navbar } from "../components/Navbar";
 import { RegisterPage } from '../pages/Register/RegisterPage'
 // import { ProductsPage } from '../pages/Products/ProductsPage'
 // import { ProtectedRoute } from './ProtectedRoute'
@@ -8,6 +9,7 @@ import { RegisterPage } from '../pages/Register/RegisterPage'
 export const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
+        <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />

@@ -1,24 +1,59 @@
 import { createTheme } from "@mui/material/styles";
 
-export const muiTheme = createTheme({
+const buttonBg = "rgb(204, 213, 0)";
+const fontColor = "rgb(81, 128, 113)";
+
+// ----- LIGHT THEME -----
+export const lightTheme = createTheme({
   palette: {
+    mode: "light",
     primary: {
-      main: "rgb(204, 213, 0)", // fundo de botões
-      contrastText: "rgb(81, 128, 113)", // cor da fonte nos botões
+      main: buttonBg,
+      contrastText: fontColor,
     },
     text: {
-      primary: "rgb(81, 128, 113)", // cor de fonte padrão
+      primary: fontColor,
     },
   },
-
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: "rgb(204, 213, 0)",
-          color: "rgb(81, 128, 113)",
+          backgroundColor: buttonBg,
+          color: fontColor,
           "&:hover": {
             backgroundColor: "rgba(204, 213, 0, 0.85)",
+          },
+        },
+      },
+    },
+  },
+});
+
+// ----- DARK THEME -----
+export const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: buttonBg,
+      contrastText: fontColor,
+    },
+    background: {
+      default: "#121212",
+      paper: "#1E1E1E",
+    },
+    text: {
+      primary: fontColor,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: buttonBg,
+          color: fontColor,
+          "&:hover": {
+            backgroundColor: "rgba(204, 213, 0, 0.7)",
           },
         },
       },
