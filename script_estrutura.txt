@@ -1,0 +1,59 @@
+# Criar pastas principais
+mkdir api
+mkdir core
+mkdir core\models
+mkdir core\viewmodels
+mkdir core\utils
+mkdir ui
+mkdir ui\components
+mkdir ui\pages
+mkdir ui\pages\Login
+mkdir ui\pages\Register
+mkdir ui\pages\Products
+mkdir ui\routes
+mkdir ui\styles
+mkdir lib
+
+# Criar arquivos base na pasta api
+new-item api\apiClient.ts -ItemType File
+new-item api\authApi.ts -ItemType File
+new-item api\productApi.ts -ItemType File
+
+# Criar arquivos base na core/models
+new-item core\models\User.ts -ItemType File
+new-item core\models\Product.ts -ItemType File
+
+# Criar arquivos base na core/viewmodels
+new-item core\viewmodels\LoginViewModel.ts -ItemType File
+new-item core\viewmodels\RegisterViewModel.ts -ItemType File
+new-item core\viewmodels\ProductListViewModel.ts -ItemType File
+new-item core\viewmodels\ProductFormViewModel.ts -ItemType File
+
+# Criar arquivos base na core/utils
+new-item core\utils\storage.ts -ItemType File
+new-item core\utils\validators.ts -ItemType File
+
+# Criar arquivos UI/components
+new-item ui\components\Input.tsx -ItemType File
+new-item ui\components\Button.tsx -ItemType File
+new-item ui\components\Navbar.tsx -ItemType File
+new-item ui\components\ProtectedRoute.tsx -ItemType File
+
+# Criar arquivos UI/pages/Login
+new-item ui\pages\Login\LoginPage.tsx -ItemType File
+
+# Criar arquivos UI/pages/Register
+new-item ui\pages\Register\RegisterPage.tsx -ItemType File
+
+# Criar arquivos UI/pages/Products
+new-item ui\pages\Products\ProductsPage.tsx -ItemType File
+new-item ui\pages\Products\ProductFormPage.tsx -ItemType File
+
+# Criar arquivos ui/routes
+new-item ui\routes\AppRoutes.tsx -ItemType File
+
+# Criar arquivos ui/styles
+new-item ui\styles\global.css -ItemType File
+
+# Criar arquivos lib
+new-item lib\http.ts -ItemType File
