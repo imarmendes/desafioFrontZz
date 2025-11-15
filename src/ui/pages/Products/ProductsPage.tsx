@@ -26,7 +26,7 @@ export const ProductsPage: React.FC = () => {
             <ListItem
               key={p.id}
               secondaryAction={
-                <IconButton onClick={() => vm.remove(p.id)}>
+                <IconButton onClick={() => vm.removeProduct(p.id)}>
                   <DeleteIcon />
                 </IconButton>
               }
