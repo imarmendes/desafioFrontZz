@@ -1,18 +1,18 @@
 # Criar pastas principais
-mkdir api
-mkdir core
-mkdir core\models
-mkdir core\viewmodels
-mkdir core\utils
-mkdir ui
-mkdir ui\components
-mkdir ui\pages
-mkdir ui\pages\Login
-mkdir ui\pages\Register
-mkdir ui\pages\Products
-mkdir ui\routes
-mkdir ui\styles
-mkdir lib
+    mkdir api
+    mkdir core
+    mkdir core\models
+    mkdir core\viewmodels
+    mkdir core\utils
+    mkdir ui
+    mkdir ui\components
+    mkdir ui\pages
+    mkdir ui\pages\Login
+    mkdir ui\pages\Register
+    mkdir ui\pages\Products
+    mkdir ui\routes
+    mkdir ui\styles
+    mkdir lib
 
 # Criar arquivos base na pasta api
 new-item api\apiClient.ts -ItemType File
