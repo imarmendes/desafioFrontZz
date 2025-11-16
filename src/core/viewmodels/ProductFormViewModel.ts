@@ -1,35 +1,66 @@
-import { useState } from "react";
-import type { Product } from "../models/Product";
-// import { productApi } from "../../api/productApi";
+import { useState, useEffect } from "react";
+import { productApi } from "../../api/productApi";
+import { validators } from "../utils/validators";
 
-export function useProductFormViewModel(initial?: Product) {
-  const [name, setName] = useState(initial?.name ?? "");
-  const [price, setPrice] = useState(initial?.price ?? 0);
-  const [description, setDescription] = useState(initial?.description ?? "");
-
-  const [saving, setSaving] = useState(false);
+export function useProductFormViewModel(productId?: number) {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // carregar produto ao editar
+  useEffect(() => {
+    if (!productId) return;
+
+    async function load() {
+      setLoading(true);
+      try {
+        const product = await productApi.getById(String(productId));
+        setName(product.name);
+        setPrice(String(product.price));
+        setDescription(product.description ?? "");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    load();
+  }, [productId]);
 
   async function save() {
     setError(null);
 
-    if (!name.trim()) return setError("Nome é obrigatório");
-    if (price <= 0) return setError("Preço inválido");
+    if (!validators.required(name)) {
+      setError("Nome é obrigatório");
+      return;
+    }
 
-    setSaving(true);
+    if (!validators.required(price) || isNaN(Number(price))) {
+      setError("Preço inválido");
+      return;
+    }
+
+    setLoading(true);
 
     try {
-      if (initial) {
-        // await productApi.update(initial.id, { name, price, description });
+      const payload = {
+        name,
+        price: Number(price),
+        description,
+      };
+
+      if (productId) {
+        await productApi.update(String(productId), payload);
       } else {
-        // await productApi.create({ name, price, description });
+        await productApi.create(payload);
       }
 
-      return true;
+      return true; // sinaliza sucesso
     } catch (err: any) {
-      setError(err.message ?? "Erro ao salvar");
+      setError(err.message ?? "Erro ao salvar produto");
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   }
 
@@ -37,11 +68,11 @@ export function useProductFormViewModel(initial?: Product) {
     name,
     price,
     description,
-    saving,
+    loading,
     error,
     setName,
     setPrice,
     setDescription,
-    save
+    save,
   };
 }
