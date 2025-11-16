@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validators } from "../utils/validators";
 import { storage } from "../utils/storage";
-// import { authApi } from "../../api/authApi";
+import { authApi } from "../../api/authApi";
 
 export function useLoginViewModel() {
   const [email, setEmail] = useState("");
@@ -35,18 +35,20 @@ export function useLoginViewModel() {
     setLoading(true);
 
     try {
-      // Futuro:
-      // const result = await authApi.login({ email, password });
+      const result = await authApi.login({ email, password });
 
-      const result = {
-        id: "1",
-        name: "Usuário Teste",
-        email,
-        token: "fake-token-123"
-      };
+      // const result = {
+      //   id: "1",
+      //   name: "Usuário Teste",
+      //   email,
+      //   token: "fake-token-123"
+      // };
 
       storage.saveUser(result);
-
+      console.log("Login viewmodel");
+      
+      console.log(result);
+      
       return result;
 
     } catch (err: any) {

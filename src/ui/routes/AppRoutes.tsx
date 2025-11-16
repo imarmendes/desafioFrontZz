@@ -4,6 +4,7 @@ import { RegisterPage } from "../pages/Register/RegisterPage";
 import { ProductsPage } from "../pages/Products/ProductsPage";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { AuthProvider } from "../../core/auth/AuthContext";
+import { PrivateLayout } from "../layout/PrivateLayout";
 
 export const AppRoutes = () => {
   return (
@@ -17,7 +18,9 @@ export const AppRoutes = () => {
             path="/products"
             element={
               <ProtectedRoute>
-                <ProductsPage />
+                <PrivateLayout>
+                  <ProductsPage />
+                </PrivateLayout>
               </ProtectedRoute>
             }
           />

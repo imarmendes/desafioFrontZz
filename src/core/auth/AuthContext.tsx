@@ -23,7 +23,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = storage.getUser();
-    if (saved) setUser(saved);
+    if (saved) {
+      if ((saved as any).user) {
+        const s = saved as any;
+        setUser({ ...s.user, token: s.token });
+      } else {
+        setUser(saved as User);
+      }
+    }
     setLoading(false);
   }, []);
 

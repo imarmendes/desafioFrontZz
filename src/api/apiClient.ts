@@ -1,4 +1,3 @@
-// api/apiClient.ts
 import axios from "axios";
 import type { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { storage } from "../core/utils/storage";
