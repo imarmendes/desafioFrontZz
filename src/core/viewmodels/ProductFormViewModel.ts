@@ -11,7 +11,6 @@ export function useProductFormViewModel(productId?: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // carregar produto ao editar
   useEffect(() => {
     if (!productId) return;
 
@@ -76,9 +75,7 @@ export function useProductFormViewModel(productId?: string) {
     error,
     setName,
     setDescription,
-    // setter para máscara
     setPriceDisplay: (input: string) => {
-      // aceita apagando tudo
       if (!input) {
         setPrice(0);
         setPriceDisplay("");
@@ -89,7 +86,6 @@ export function useProductFormViewModel(productId?: string) {
       setPrice(numeric);
       setPriceDisplay(masked);
     },
-    // já exposto acima
     save,
   };
 }

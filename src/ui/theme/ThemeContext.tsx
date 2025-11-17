@@ -18,7 +18,6 @@ const ThemeModeContext = createContext<ThemeContextType>({
 export const AppThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mode, setMode] = useState<ThemeMode>("light");
 
-  // carregar do localStorage
   useEffect(() => {
     const saved = localStorage.getItem("app-theme-mode");
     if (saved === "light" || saved === "dark") {
@@ -26,7 +25,6 @@ export const AppThemeProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   }, []);
 
-  // salvar no localStorage
   useEffect(() => {
     localStorage.setItem("app-theme-mode", mode);
   }, [mode]);

@@ -1,4 +1,3 @@
-// ui/pages/Register/RegisterPage.tsx
 import React from 'react'
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'

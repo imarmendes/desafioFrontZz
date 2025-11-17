@@ -3,7 +3,6 @@ import { createTheme } from "@mui/material/styles";
 const buttonBg = "rgb(204, 213, 0)";
 const fontColor = "rgb(81, 128, 113)";
 
-// ----- LIGHT THEME -----
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -30,7 +29,6 @@ export const lightTheme = createTheme({
   },
 });
 
-// ----- DARK THEME -----
 export const darkTheme = createTheme({
   palette: {
     mode: "dark",
