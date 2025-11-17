@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 export const ProductFormPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const productId = id ? Number(id) : undefined;
+  const productId = id; // manter como string
 
   const vm = useProductFormViewModel(productId);
 
@@ -41,10 +41,18 @@ export const ProductFormPage: React.FC = () => {
 
             <TextField
               label="Preço"
-              type="number"
-              value={vm.price}
-              onChange={(e) => vm.setPrice(e.target.value)}
+              value={vm.priceDisplay}
+              onChange={(e) => vm.setPriceDisplay(e.target.value)}
               required
+              inputMode="numeric"
+            />
+
+            <TextField
+              label="Descrição"
+              type="text"
+              value={vm.description}
+              onChange={(e) => vm.setDescription(e.target.value)}
+              multiline
             />
 
             {vm.error && (

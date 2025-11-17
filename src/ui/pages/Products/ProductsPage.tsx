@@ -19,9 +19,6 @@ export const ProductsPage: React.FC = () => {
 
   if (vm.loading) return <div>Carregando produtos...</div>;
 
-  console.log(vm.products);
-  
-
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Paper sx={{ p: 3 }}>

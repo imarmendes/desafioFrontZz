@@ -3,7 +3,7 @@ import type { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { storage } from "../core/utils/storage";
 
 // 👉 coloque aqui a URL da sua API
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:3000/api";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,

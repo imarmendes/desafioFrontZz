@@ -45,9 +45,6 @@ export function useLoginViewModel() {
       // };
 
       storage.saveUser(result);
-      console.log("Login viewmodel");
-      
-      console.log(result);
       
       return result;
 

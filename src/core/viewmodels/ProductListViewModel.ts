@@ -10,8 +10,6 @@ export function useProductListViewModel() {
     setLoading(true);
     try {
       const list = await productApi.list();   
-      console.log(list, "productListviewmodel");
-         
 
       setProducts(list);
     } finally {

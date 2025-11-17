@@ -3,12 +3,14 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { useNavigate } from 'react-router-dom'
 import { MUITextField } from '../../components/mui/MUITextField'
 import { MUIButton } from '../../components/mui/MUIButton'
 import { useRegisterViewModel } from '../../../core/viewmodels/RegisterViewModel'
 
 export const RegisterForm: React.FC = () => {
   const vm = useRegisterViewModel()
+  const navigate = useNavigate()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -16,8 +18,7 @@ export const RegisterForm: React.FC = () => {
     const user = await vm.register()
 
     if (user) {
-      console.log("Registered:", user)
-      // TODO → navegar para /products ou /login
+      navigate('/login')
     }
   }
 

@@ -1,8 +1,7 @@
-// core/viewmodels/RegisterViewModel.ts
 import { useState } from "react";
 import { validators } from "../utils/validators";
 import { storage } from "../utils/storage";
-// import { authApi } from "../../api/authApi"; // habilitar depois
+import { authApi } from "../../api/authApi"; 
 
 export function useRegisterViewModel() {
   const [name, setName] = useState("");
@@ -41,15 +40,15 @@ export function useRegisterViewModel() {
 
     try {
       // Chamada real futuramente:
-      // const user = await authApi.register({ name, email, password });
+      const user = await authApi.register({ name, email, password });
 
       // Simulação por enquanto:
-      const user = {
-        id: "fake-id-1",
-        name,
-        email,
-        token: "fake-token-999",
-      };
+      // const user = {
+      //   id: "fake-id-1",
+      //   name,
+      //   email,
+      //   token: "fake-token-999",
+      // };
 
       storage.saveUser(user);
 

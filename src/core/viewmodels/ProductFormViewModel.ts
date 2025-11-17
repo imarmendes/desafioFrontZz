@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { productApi } from "../../api/productApi";
 import { validators } from "../utils/validators";
+import { formatBRLFromNumber, formatBRLFromDigits, parseNumberFromMaskedBRL } from "../utils/money";
 
-export function useProductFormViewModel(productId?: number) {
+export function useProductFormViewModel(productId?: string) {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState<string>("");
+  const [price, setPrice] = useState<number>(0); // valor numérico em reais
+  const [priceDisplay, setPriceDisplay] = useState<string>(""); // máscara BRL
   const [description, setDescription] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +20,8 @@ export function useProductFormViewModel(productId?: number) {
       try {
         const product = await productApi.getById(String(productId));
         setName(product.name);
-        setPrice(String(product.price));
+        setPrice(product.price);
+        setPriceDisplay(formatBRLFromNumber(product.price));
         setDescription(product.description ?? "");
       } finally {
         setLoading(false);
@@ -36,7 +39,7 @@ export function useProductFormViewModel(productId?: number) {
       return;
     }
 
-    if (!validators.required(price) || isNaN(Number(price))) {
+    if (price <= 0 || isNaN(price)) {
       setError("Preço inválido");
       return;
     }
@@ -46,7 +49,7 @@ export function useProductFormViewModel(productId?: number) {
     try {
       const payload = {
         name,
-        price: Number(price),
+        price: price,
         description,
       };
 
@@ -67,12 +70,26 @@ export function useProductFormViewModel(productId?: number) {
   return {
     name,
     price,
+    priceDisplay,
     description,
     loading,
     error,
     setName,
-    setPrice,
     setDescription,
+    // setter para máscara
+    setPriceDisplay: (input: string) => {
+      // aceita apagando tudo
+      if (!input) {
+        setPrice(0);
+        setPriceDisplay("");
+        return;
+      }
+      const masked = formatBRLFromDigits(input);
+      const numeric = parseNumberFromMaskedBRL(masked);
+      setPrice(numeric);
+      setPriceDisplay(masked);
+    },
+    // já exposto acima
     save,
   };
 }

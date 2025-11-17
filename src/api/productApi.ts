@@ -3,7 +3,6 @@ import { apiClient } from "./apiClient";
 export const productApi = {
   async list() {
     const resp = await apiClient.get("/products");
-    console.log(resp.data, "productAP");
     
     return resp.data;
   },
