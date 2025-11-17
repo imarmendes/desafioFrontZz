@@ -16,7 +16,7 @@ export const LoginForm: React.FC = () => {
     const result = await vm.login()
 
     if (result) {
-      navigate('/products') // rota após login
+      navigate('/products')
     }
   }
 

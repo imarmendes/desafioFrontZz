@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 export const ProductFormPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const productId = id; // manter como string
+  const productId = id; 
 
   const vm = useProductFormViewModel(productId);
 

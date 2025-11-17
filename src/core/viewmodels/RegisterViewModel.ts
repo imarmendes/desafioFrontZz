@@ -15,7 +15,6 @@ export function useRegisterViewModel() {
   async function register() {
     setError(null);
 
-    // validações
     if (!validators.required(name)) {
       setError("Nome é obrigatório");
       return;
@@ -39,16 +38,7 @@ export function useRegisterViewModel() {
     setLoading(true);
 
     try {
-      // Chamada real futuramente:
       const user = await authApi.register({ name, email, password });
-
-      // Simulação por enquanto:
-      // const user = {
-      //   id: "fake-id-1",
-      //   name,
-      //   email,
-      //   token: "fake-token-999",
-      // };
 
       storage.saveUser(user);
 

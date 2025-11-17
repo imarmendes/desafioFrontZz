@@ -2,8 +2,7 @@ import axios from "axios";
 import type { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { storage } from "../core/utils/storage";
 
-// 👉 coloque aqui a URL da sua API
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -13,7 +12,6 @@ export const apiClient = axios.create({
   },
 });
 
-// 🔥 Interceptor para adicionar o token automaticamente
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const user = storage.getUser(); // { token, name, email }
@@ -29,7 +27,6 @@ apiClient.interceptors.request.use(
   (error: any) => Promise.reject(error)
 );
 
-// 🔥 Interceptor para erros globais
 apiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: any) => {

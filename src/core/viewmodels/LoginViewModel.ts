@@ -37,13 +37,6 @@ export function useLoginViewModel() {
     try {
       const result = await authApi.login({ email, password });
 
-      // const result = {
-      //   id: "1",
-      //   name: "Usuário Teste",
-      //   email,
-      //   token: "fake-token-123"
-      // };
-
       storage.saveUser(result);
       
       return result;

@@ -1,4 +1,3 @@
-// util de formatação de moeda BRL
 export function formatBRLFromNumber(value: number): string {
   if (isNaN(value)) return '';
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
