@@ -6,16 +6,19 @@ import { MUITextField } from '../../components/mui/MUITextField'
 import { MUIButton } from '../../components/mui/MUIButton'
 import { useLoginViewModel } from '../../../core/viewmodels/LoginViewModel'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../../core/auth/AuthContext'
 
 export const LoginForm: React.FC = () => {
   const vm = useLoginViewModel()
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const result = await vm.login()
 
     if (result) {
+      login(result) // atualiza o contexto de autenticação
       navigate('/products')
     }
   }
